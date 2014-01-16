@@ -1,0 +1,174 @@
+body {
+    padding-top: 40px;
+}
+html,body {
+    font-size: 95%;
+    color: #333;
+}
+table tr {
+    background: #f2f2f2;
+}
+table {
+    width: 100%;
+    border: 0;
+    border-spacing: 0 1px;
+}
+.header {
+    margin-bottom: 3rem;
+}
+.user-nav a.button {
+    width: 100px;
+}
+hr {
+    border-style: dotted;
+}
+h1 {
+    font-size: 3.75rem;
+}
+h1 small {
+    font-size: 1.2rem;
+}
+h4 {
+    color: #777777;
+    margin: 0.5rem 0;
+}
+h6 {
+    font-weight: 500;
+    margin: 0 0 1.2rem;
+}
+p {
+    font-size: 0.875rem;
+    color: #666;
+}
+.tracker-container {
+    height: 15.75rem;
+    margin-bottom: 10px;
+    position: relative;
+    background-color: #f9f9f9;
+}
+.tracker-container .loading {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+}
+.tracker-container .loading img {
+    margin-left: -50%;
+    margin-top: -50%;
+}
+.tracker-container h3 {
+    color: #fcfcfc;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.tracker-container h3 small {
+    color: #e2e2e2;
+}
+.tracker-container .tracker .hero-text {
+    font-weight: 300;
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+.tracker-container .main {
+    background-color: #5193B1;
+    height: 11.5em;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    padding: 2rem;
+}
+table tr td {
+    color: #666
+}
+.tracker-container .tracker.inactive .main {
+    background-color: #fcfcfc;
+    border: 1px solid #eaeaea;
+}
+.tracker-container .tracker.inactive .hero-text,
+.tracker-container .tracker.inactive h3 small {
+    color: #777;
+}
+.tracker-container .tracker.inactive h3,
+.tracker-container .tracker.inactive ul.stats h5 {
+    color: #999;
+}
+.tracker-container .tracker.inactive ul.stats li {
+    border-color: #e9e9e9;
+}
+.tracker-container .tracker.inactive ul.stats p {
+    color: #888;
+}
+.tracker-container ul.stats {
+    list-style: none;
+    margin: 0;
+    padding: 0 2rem;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 0;
+    border: 1px solid #e7e7e7;
+    border-top: 0;
+}
+.tracker-container ul.stats:before {
+    content: " ";
+    display: table;
+}
+.tracker-container ul.stats:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.tracker-container ul.stats li {
+    border-left: 1px solid #e2e2e2;
+    padding: 1.2rem 0 1.2rem 0.9rem;
+    width: 6.5rem;
+    float: left;
+}
+.tracker-container ul.stats li:first-child {
+    border-left: none;
+    margin-left: -0.9rem;
+}
+.tracker-container ul.stats li h5 {
+    font-family: Arial,sans-serif;
+    font-size: 0.7rem;
+    color: #AEAEAE;
+    font-weight: 600;
+    margin-top: 0;
+}
+.tracker-container ul.stats li p {
+    margin-bottom: 0;
+    line-height: 1rem;
+    font-size: 1.05rem;
+    color: #6f6f6f;
+
+}
+.side-nav {
+    padding-top: 0
+}
+
+[highlighter], [highlighter] td {
+    transition: color 500ms ease, background 500ms ease;
+}
+
+[class^=highlighted] {
+    transition: none;
+}
+
+.highlighted, .highlighted td {
+   background: #e2e2e2;
+}
+
+.highlighted-increase, .highlighted-increase td {
+   /*color: #3c763d;*/
+   background: #dff0d8;
+}
+
+.highlighted-decrease, .highlighted-decrease td {
+    /*color: #a94442;*/
+    background: #f2cdcd;
+}
+.button.active {
+    background-color: #5193B1 !important;
+    border-color: #5193B1 !important;
+    color: #ffffff !important;
+}
