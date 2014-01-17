@@ -1,5 +1,19 @@
 <?php
 
+
+function curlRequest($url) {
+  //  Initiate curl
+  $ch = curl_init();
+  // Disable SSL verification
+  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+  // Will return the response, if false it print the response
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  // Set the url
+  curl_setopt($ch, CURLOPT_URL,$url);
+  // Execute
+  return curl_exec($ch);
+}
+
 $userTrackers = require 'trackers.php';
 $allTrackers  = [];
 
@@ -19,7 +33,7 @@ if(isset($_GET['resource'])) {
   $request = $_GET['resource'];
 
   if(isset($resources[$request]))
-      echo file_get_contents($resources[$request]);
+      echo curlRequest($resources[$request]);
 
 } elseif(isset($_GET['trackersByUser'])) {
 
@@ -40,9 +54,7 @@ if(isset($_GET['resource'])) {
   $request = $_GET['trackerById'];
 
   if(isset($allTrackers[$request])) {
-    $json = file_get_contents($allTrackers[$request]['url']);
-    $contents = json_decode($json);
-    echo json_encode($contents);
+    echo curlRequest($allTrackers[$request]['url']);
   }
 
 }

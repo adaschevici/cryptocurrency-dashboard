@@ -84,6 +84,9 @@ table tr td {
     background-color: #fcfcfc;
     border: 1px solid #eaeaea;
 }
+.tracker-container .tracker.error .main {
+    height: 15.75rem;
+}
 .tracker-container .tracker.inactive .hero-text,
 .tracker-container .tracker.inactive h3 small {
     color: #777;

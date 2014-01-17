@@ -5,7 +5,7 @@
             <h6>Trackers</h6>
             <ul class="side-nav">
                 <li ng-repeat="tracker in trackerList" ng-class="{active: isTrackerWatched(tracker.id)}">
-                    <a data-tracker-id="{{id}}" ng-click="toggleWatchTracker(tracker.id)">{{tracker.getName()}}</a>
+                    <a data-tracker-id="{{id}}" ng-click="toggleWatchTracker(tracker.id)">{{tracker.name}}</a>
                 </li>
             </ul>
             <br>

@@ -36,14 +36,25 @@ angular.module('dashboardApp.directives', [])
             scope: true,
             templateUrl: "views/tracker.html",
             link: function (scope, element, attrs) {
+
                 scope.tracker = trackerService.loadTracker(attrs.trackerId)
                 scope.$watch('tracker', function(data) {
                     scope.coinID  = data.coin.id
                     scope.coinPriceBtc  = data.coin.price_btc
                 }, true)
-                scope.tracker.startPolling().then(function() {
-                    scope.trackerLoaded = true
-                })
+
+                scope.loadTracker = function() {
+                    scope.requestCompleted = false
+                    scope.trackerLoaded = false
+                    scope.tracker.startPolling().then(function() {
+                        scope.trackerLoaded = true
+                    }, function(errorMessage) {
+                        scope.errorMessage = errorMessage
+                    }).finally(function() {
+                        scope.requestCompleted = true
+                    })
+                }
+                scope.loadTracker()
             }
         }
     }])

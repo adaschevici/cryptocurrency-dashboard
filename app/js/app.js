@@ -38,7 +38,6 @@ angular.module('dashboardApp')
                 }],
                 resolve: {
                     trackers: ['$stateParams', 'dashboard', 'trackerService', function($stateParams, dashboard, trackerService) {
-                        trackerService.resetTrackers()
                         return trackerService.loadTrackers($stateParams.user)
                     }]
                 }
