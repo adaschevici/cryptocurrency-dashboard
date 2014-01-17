@@ -1,17 +1,17 @@
 <div class="tracker-container">
-    <div class="loading" ng-hide="requestCompleted">
+    <div class="loading" ng-if="!requestCompleted">
         <img src="images/ajax-loader.gif">
     </div>
-    <div class="tracker" ng-show="requestCompleted" ng-class="{inactive: !tracker.isActive(), error: !trackerLoaded}">
+    <div class="tracker" ng-if="requestCompleted" ng-class="{inactive: !tracker.isActive(), error: !trackerLoaded}">
         <div class="main">
             <h3>{{tracker.name}} <small>{{coinID | uppercase}} | {{coinPriceBtc | number:6}}</small></h3>
             <div class="hero-text">{{tracker.balance | number:3}}</div>
-            <div ng-show="!trackerLoaded">
+            <div ng-if="!trackerLoaded">
                 <p>{{errorMessage}}</p>
                 <button ng-click="loadTracker()" class="small button">Retry</button>
             </div>
         </div>
-        <ul ng-show="trackerLoaded" class="stats">
+        <ul ng-if="trackerLoaded" class="stats">
             <li>
                 <h5>SHARERATE</h5>
                 <p>{{tracker.sharerate | digits:4}}</p>

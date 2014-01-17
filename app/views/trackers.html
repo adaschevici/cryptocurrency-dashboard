@@ -1,9 +1,9 @@
 <h6>Trackers</h6>
-<div ng-show="trackerList.length === 0">
+<div ng-if="trackerList.length === 0">
     <p>You have not yet added any trackers.</p>
 </div>
-<div ng-show="trackerList.length > 0">
-    <div ng-show="watchedTrackers.length == 0">
+<div ng-if="trackerList.length > 0">
+    <div ng-if="watchedTrackers.length == 0">
         <p>You are not currently watching any trackers.</p>
     </div>
     <tracker ng-repeat="tracker in trackerList | filter: isTrackerWatched" tracker-id="{{tracker.id}}"></tracker>

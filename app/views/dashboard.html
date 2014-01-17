@@ -1,7 +1,6 @@
 <div class="row">
     <div class="medium-2 columns">
-
-        <div ng-show="trackerList.length > 0">
+        <div ng-if="trackerList.length > 0">
             <h6>Trackers</h6>
             <ul class="side-nav">
                 <li ng-repeat="tracker in trackerList" ng-class="{active: isTrackerWatched(tracker.id)}">
@@ -10,7 +9,6 @@
             </ul>
             <br>
         </div>
-
         <h6>Markets</h6>
         <ul class="side-nav">
             <li ng-repeat="(id, name) in marketNames" ng-class="{active: isMarketWatched(id)}">

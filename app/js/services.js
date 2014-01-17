@@ -138,9 +138,6 @@ angular.module('dashboardApp.services', [])
                 isActive: function() {
                     return this.hashrate > 0 || this.sharerate > 0
                 },
-                getName: function() {
-                    return
-                },
                 getValue: function(market, count) {
                     return this.coin.price_usd[market] * count
                 }
