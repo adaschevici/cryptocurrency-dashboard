@@ -34,7 +34,7 @@ angular.module('dashboardApp')
                     $scope.$parent.user = $stateParams.user
                     $scope.$parent.trackers = trackers
                     $scope.$parent.trackerList = _.toArray(trackers)
-                    $scope.$parent.watchedTrackers = $cookieStore.get('watchedTrackers:'+$stateParams.user) || _.pluck(trackers, 'trackerID')
+                    $scope.$parent.watchedTrackers = $cookieStore.get('watchedTrackers:'+$stateParams.user) || _.pluck(trackers, 'id')
                 }],
                 resolve: {
                     trackers: ['$stateParams', 'dashboard', 'trackerService', function($stateParams, dashboard, trackerService) {
