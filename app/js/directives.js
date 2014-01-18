@@ -38,6 +38,7 @@ angular.module('dashboardApp.directives', [])
             link: function (scope, element, attrs) {
 
                 scope.tracker = trackerService.loadTracker(attrs.trackerId)
+
                 scope.$watch('tracker', function(data) {
                     scope.coinID  = data.coin.id
                     scope.coinPriceBtc  = data.coin.price_btc

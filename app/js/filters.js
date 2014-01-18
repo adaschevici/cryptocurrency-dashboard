@@ -42,6 +42,14 @@ angular.module('dashboardApp.filters', [])
         }
     })
 
+    .filter('trackerUnits', ['$filter', function($filter) {
+        return function(val, digits) {
+            if(val < 0)
+                return "N/A"
+            else return $filter('digits')(val, digits)
+        }
+    }])
+
 
 
 

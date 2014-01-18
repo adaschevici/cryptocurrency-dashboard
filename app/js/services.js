@@ -2,8 +2,8 @@ angular.module('dashboardApp.services', [])
 
     .factory('apiInterface', ['$http', function($http) {
         function loadData(query) {
-            return $http.get('api/requestHandler.php?'+query, {timeout: 10000}).error(function(errorMessage) {
-                console.error(errorMessage)
+            return $http.get('api/requestHandler.php?'+query, {timeout: 10000}).error(function(data, status) {
+                throw status
             })
         }
         return {
@@ -17,13 +17,16 @@ angular.module('dashboardApp.services', [])
                     return response.data
                 })
             },
+            loadPoolData: function(id) {
+                return loadData('poolById='+id)
+            },
+            loadTrackerData: function(id) {
+                return loadData('trackerById='+id)
+            },
             loadTrackers: function(user) {
                 return loadData('trackersByUser='+user).then(function(response) {
                     return response.data
                 })
-            },
-            loadTrackerData: function(id) {
-                return loadData('trackerById='+id)
             }
         }
     }])
@@ -63,8 +66,6 @@ angular.module('dashboardApp.services', [])
                     coinNames[coinData.id] = coinData.name
                 })
                 data.coins = coins
-            }, function(errorMessage) {
-                console.error(errorMessage)
             })
         }
 
@@ -107,23 +108,33 @@ angular.module('dashboardApp.services', [])
                 startPolling: function() {
                     var tracker = this
                     function pollData() {
-                        return apiInterface.loadTrackerData(tracker.id).then(function(response) {
-                            if(response.data == "")
-                                throw "The tracker returned no data."
-                            var trackerData = response.data.getuserstatus.data
+                        var q = [apiInterface.loadTrackerData(tracker.id)]
+                        tracker.hasPool && q.push(apiInterface.loadPoolData(tracker.id))
+
+                        return $q.all(q).then(function(response) {
+                            if(response[0].data == "")
+                                throw "The user tracker returned no data."
+                            var trackerData = response[0].data.getuserstatus.data
                             if(_.isUndefined(trackerData))
                                 throw 'Invalid tracker.'
-                            if(!_.isObject(trackerData))
-                                throw trackerData
+                            if(!_.isObject(trackerData)) {
+                                throw "The tracker data is invalid."
+                            }
                             var activity = _.has(trackerData, 'transactions'),
                                 transactions = {
-                                    credit:      activity ? trackerData.transactions.Credit   : 0,
-                                    debitAuto:   activity ? trackerData.transactions.Debit_AP : 0,
-                                    debitManual: activity ? trackerData.transactions.Debit_MP : 0
+                                    credit:      activity ? trackerData.transactions.Credit   : -1,
+                                    debitAuto:   activity ? trackerData.transactions.Debit_AP : -1,
+                                    debitManual: activity ? trackerData.transactions.Debit_MP : -1
                                 }
-                            transactions.debitTotal = transactions.debitAuto + transactions.debitManual
-                            transactions.balance    = transactions.credit - transactions.debitTotal
+                            transactions.debitTotal = transactions.credit < 0 ?  -1 : transactions.debitAuto + transactions.debitManual
+                                transactions.balance    = transactions.credit < 0 ?  -1 : transactions.credit - transactions.debitTotal
                             _.extend(tracker, _.pick(trackerData, 'hashrate', 'sharerate'), transactions)
+
+                            if(angular.isDefined(response[1])) {
+                                if(response[1].data == "")
+                                    throw "The tracker pool returned no data."
+                                angular.extend(tracker, { pool: response[1].data.getpoolstatus.data})
+                            }
                         })
                     }
                     return pollData().then(function() {

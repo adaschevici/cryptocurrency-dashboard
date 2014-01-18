@@ -42,8 +42,9 @@ if(isset($_GET['resource'])) {
   if(isset($userTrackers[$request])) {
     $trackers = array();
     foreach($userTrackers[$request] as $key => $params) {
-      unset($params['url']);
       $params['id'] = $request . $key;
+      $params['hasPool'] = isset($params['pool']);
+      unset($params['user'], $params['pool']);
       $trackers[] = (object) $params;
     }
     echo json_encode($trackers);
@@ -54,7 +55,15 @@ if(isset($_GET['resource'])) {
   $request = $_GET['trackerById'];
 
   if(isset($allTrackers[$request])) {
-    echo curlRequest($allTrackers[$request]['url']);
+    echo curlRequest($allTrackers[$request]['user']);
+  }
+
+} elseif(isset($_GET['poolById'])) {
+
+  $request = $_GET['poolById'];
+
+  if(isset($allTrackers[$request])) {
+    echo curlRequest($allTrackers[$request]['pool']);
   }
 
 }
