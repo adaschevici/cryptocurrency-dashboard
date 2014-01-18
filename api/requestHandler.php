@@ -15,7 +15,7 @@ function curlRequest($url) {
 }
 
 $userTrackers = require 'trackers.php';
-$allTrackers  = [];
+$allTrackers  = array();
 
 foreach($userTrackers as $user => $trackers) {
   foreach($trackers as $key => $params) {
@@ -40,7 +40,7 @@ if(isset($_GET['resource'])) {
   $request = $_GET['trackersByUser'];
 
   if(isset($userTrackers[$request])) {
-    $trackers = [];
+    $trackers = array();
     foreach($userTrackers[$request] as $key => $params) {
       unset($params['url']);
       $params['id'] = $request . $key;
