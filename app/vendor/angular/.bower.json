@@ -1,0 +1,16 @@
+{
+  "name": "angular",
+  "version": "1.2.9-build.2123+sha.2cd09c9",
+  "main": "./angular.js",
+  "dependencies": {},
+  "homepage": "https://github.com/angular/bower-angular",
+  "_release": "1.2.9-build.2123+sha.2cd09c9",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.9-build.2123+sha.2cd09c9",
+    "commit": "89ab68e446aed825b92425cb95e26f43befd1e5e"
+  },
+  "_source": "git://github.com/angular/bower-angular.git",
+  "_target": "~1.2.7",
+  "_originalSource": "angular"
+}
