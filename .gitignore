@@ -1,4 +1,4 @@
 .idea
 .htaccess
+api/vendor
 # api/trackers.php
-# api/vendor

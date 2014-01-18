@@ -23,11 +23,11 @@ return array(
       'anc'  => array(
         'coinID' => 'anc',
         'user'   => "http://anc.coinpool.in/index.php?page=api&action=getuserstatus&api_key=a30da728af5733e9e520e86c57b3b202d4d05b2739e6696ce408c16054a8ef0a&id=3773",
-        'pool'   => "https://pool.dogechain.info/index.php?page=api&action=getpoolstatus&api_key=a94f88ad26da4afd79134c29302b72e7bf24c72a5d36331fbda5271969295e93"
       ),
       'doge' => array(
         'coinID' => 'doge',
-        'user'   => "https://pool.dogechain.info/index.php?page=api&action=getuserstatus&api_key=a94f88ad26da4afd79134c29302b72e7bf24c72a5d36331fbda5271969295e93&id=34470"
+        'user'   => "https://pool.dogechain.info/index.php?page=api&action=getuserstatus&api_key=a94f88ad26da4afd79134c29302b72e7bf24c72a5d36331fbda5271969295e93&id=34470",
+        'pool'   => "https://pool.dogechain.info/index.php?page=api&action=getpoolstatus&api_key=a94f88ad26da4afd79134c29302b72e7bf24c72a5d36331fbda5271969295e93"
       ),
       'wdc'  => array(
         'coinID' => 'wdc',
