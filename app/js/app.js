@@ -29,7 +29,7 @@ angular.module('dashboardApp')
             })
             .state('dashboard.trackers', {
                 url: '/{user:ben|captain}',
-                templateUrl: "views/trackers.html",
+                templateUrl: "views/trackerList.html",
                 controller: ['$cookieStore', '$scope', '$stateParams', 'trackers', function($cookieStore, $scope, $stateParams, trackers) {
                     $scope.$parent.user = $stateParams.user
                     $scope.$parent.trackers = trackers
