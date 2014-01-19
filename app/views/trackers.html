@@ -6,5 +6,5 @@
     <div ng-show="watchedTrackers.length === 0">
         <p>You are not currently watching any trackers.</p>
     </div>
-    <tracker ng-repeat="tracker in trackerList | filter: isTrackerWatched" tracker-id="{{tracker.id}}"></tracker>
+    <tracker ng-repeat="tracker in trackerList | filter: isTrackerWatched | orderBy:'-isActive()'" tracker-id="{{tracker.id}}"></tracker>
 </div>

@@ -117,7 +117,6 @@ p {
     padding-right: 0.3rem;
 }
 .tracker .pool-data {
-    background: rgba(0, 0, 0, 0.09);
     padding: 3rem 0rem;
 }
 .tracker .pool-data h6 {
@@ -156,7 +155,7 @@ p {
 /* DEFAULT COLORS */
 
 .tracker {
-    background-color: #f7f7f7;
+    background-color: #f4f4f4;
 }
 .tracker p {
     color: #888;
@@ -175,6 +174,9 @@ p {
 }
 .tracker .user-data ul.stats li {
     border-color: #aaa;
+}
+.tracker .pool-data {
+    background: #e2e2e2;
 }
 .tracker .pool-data table.stats td.data-label {
     color: #999;
@@ -204,6 +206,9 @@ p {
 }
 .tracker.active .user-data ul.stats li {
     border-color: #ccc;
+}
+.tracker.active .pool-data {
+    background: rgba(0, 0, 0, 0.09);
 }
 .tracker.active .pool-data h6 {
     color: #eee;

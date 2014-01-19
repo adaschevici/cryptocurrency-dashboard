@@ -23,6 +23,7 @@ return array(
       'anc'  => array(
         'coinID' => 'anc',
         'user'   => "http://anc.coinpool.in/index.php?page=api&action=getuserstatus&api_key=a30da728af5733e9e520e86c57b3b202d4d05b2739e6696ce408c16054a8ef0a&id=3773",
+        'pool'   => "http://anc.coinpool.in/index.php?page=api&action=getpoolstatus&api_key=a30da728af5733e9e520e86c57b3b202d4d05b2739e6696ce408c16054a8ef0a"
       ),
       'doge' => array(
         'coinID' => 'doge',
@@ -31,7 +32,8 @@ return array(
       ),
       'wdc'  => array(
         'coinID' => 'wdc',
-        'user'   => "https://wdc.nut2pools.com/index.php?page=api&action=getuserstatus&api_key=f34259378201e88d580d88f9df7f556baaaab4aa938d4c3c115a42636fd5d5cb&id=2290"
+        'user'   => "https://wdc.nut2pools.com/index.php?page=api&action=getuserstatus&api_key=f34259378201e88d580d88f9df7f556baaaab4aa938d4c3c115a42636fd5d5cb&id=2290",
+        'pool'   => "https://wdc.nut2pools.com/index.php?page=api&action=getpoolstatus&api_key=f34259378201e88d580d88f9df7f556baaaab4aa938d4c3c115a42636fd5d5cb"
       )
     ),
 
