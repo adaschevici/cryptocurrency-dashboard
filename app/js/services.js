@@ -147,7 +147,6 @@ angular.module('dashboardApp.services', [])
                     $interval.cancel(interval)
                 },
                 isActive: function() {
-                    if(this.id === 'captaindoge') return true
                     return this.hashrate > 0 || this.sharerate > 0
                 },
                 getValue: function(market, count) {
