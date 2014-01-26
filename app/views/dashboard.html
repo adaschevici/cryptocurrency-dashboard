@@ -18,6 +18,7 @@
     </div>
 
     <div class="medium-7 columns">
+        {{test}}
         <div ui-view></div>
     </div>
 
@@ -29,7 +30,7 @@
                 hl-watch="market.rates.bid"
                 hl-duration="3000">
                 <td>{{marketNames[market.id] || market.id}}</td>
-                <td>{{market.rates.bid | dollarize:0}}</td>
+                <td>{{market.rates.bid | dollarize}}</td>
             </tr>
         </table>
         <br>

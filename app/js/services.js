@@ -31,12 +31,14 @@ angular.module('dashboardApp.services', [])
         }
     }])
 
-
     .factory('dashboardService', ['$q', '$interval', 'apiInterface', function($q, $interval, apiInterface) {
         var data = {
-                markets:   {},
-                coins:     {}
-            }
+            markets:     {},
+            coins:       {},
+            pollCount:    0,
+            pollsFailed:  0,
+            lastUpdated: -1
+        }
 
         function pollData() {
             return $q.all([
@@ -62,19 +64,17 @@ angular.module('dashboardApp.services', [])
                         rates[market.id] = coinData.price_btc * market.rates.bid
                     })
                     coinData.volume_btc = Number(coinData.volume_btc)
-                    coins[coinData.id] = _.extend(coinData, { price_usd: rates })
+                    coinData.price_btc  = Number(coinData.price_btc)
+                    coins[coinData.id]  = _.extend(coinData, { price_usd: rates })
                     coinNames[coinData.id] = coinData.name
                 })
                 data.coins = coins
+                data.lastUpdated = new Date().getTime()
+            }, function() {
+                data.pollsFailed++
+            }).finally(function() {
+                data.pollCount++
             })
-        }
-
-        data.getCoin = function(id) {
-            return data.coins[id]
-        }
-
-        data.getCoinName = function(id) {
-            return data.coins[id].name
         }
 
         data.initialize = function() {
@@ -84,7 +84,6 @@ angular.module('dashboardApp.services', [])
                 }, 3000)
             })
         }
-
         return data;
     }])
 
@@ -95,56 +94,71 @@ angular.module('dashboardApp.services', [])
 
         function Tracker(data) {
             _.extend(this, data, {
-                coin: dashboardService.coins[data.coinID],
-                name: data.name || dashboardService.coins[data.coinID].name
+                coin:         dashboardService.coins[data.coinID],
+                name:         data.name || dashboardService.coins[data.coinID].name,
+                lastUpdated: -1,
+                pollCount:    0,
+                errors:       []
             })
         }
 
         Tracker.prototype = (function() {
 
-            var interval
+           function pollData(tracker) {
+               tracker.pollCount++
+               var q = [apiInterface.loadTrackerData(tracker.id)]
+               tracker.hasPool && q.push(apiInterface.loadPoolData(tracker.id))
 
-            return {
-                startPolling: function() {
-                    var tracker = this
-                    function pollData() {
-                        var q = [apiInterface.loadTrackerData(tracker.id)]
-                        tracker.hasPool && q.push(apiInterface.loadPoolData(tracker.id))
-
-                        return $q.all(q).then(function(response) {
-                            if(response[0].data == "")
-                                throw "The user tracker returned no data."
-                            var trackerData = response[0].data.getuserstatus.data
-                            if(_.isUndefined(trackerData))
-                                throw 'Invalid tracker.'
-                            if(!_.isObject(trackerData)) {
-                                throw "The tracker data is invalid."
-                            }
+               return $q.all(q).then(function(response) {
+                    if(response[0].data == "") {
+                        tracker.errors.push("The user tracker returned no data.")
+                    } else {
+                        var trackerData = response[0].data.getuserstatus.data
+                        if(_.isUndefined(trackerData) || !_.isObject(trackerData)) {
+                            tracker.errors.push('Invalid tracker.')
+                        } else {
                             var activity = _.has(trackerData, 'transactions'),
                                 transactions = {
                                     credit:      activity ? trackerData.transactions.Credit   : -1,
                                     debitAuto:   activity ? trackerData.transactions.Debit_AP : -1,
                                     debitManual: activity ? trackerData.transactions.Debit_MP : -1
                                 }
-                            transactions.debitTotal = transactions.credit < 0 ?  -1 : transactions.debitAuto + transactions.debitManual
-                                transactions.balance    = transactions.credit < 0 ?  -1 : transactions.credit - transactions.debitTotal
+                            transactions.debitTotal = transactions.credit < 0 ? -1 : transactions.debitAuto + transactions.debitManual
+                            transactions.balance    = transactions.credit < 0 ? -1 : transactions.credit - transactions.debitTotal
                             _.extend(tracker, _.pick(trackerData, 'hashrate', 'sharerate'), transactions)
 
                             if(angular.isDefined(response[1])) {
                                 if(response[1].data == "")
-                                    throw "The tracker pool returned no data."
-                                angular.extend(tracker, { pool: response[1].data.getpoolstatus.data})
+                                    tracker.errors.push("The tracker pool returned no data.")
+                                else angular.extend(tracker, { pool: response[1].data.getpoolstatus.data})
                             }
-                        })
+                            tracker.errors.length = 0
+                            tracker.lastUpdated   = new Date().getTime()
+                        }
                     }
-                    return pollData().then(function() {
-                        interval = $interval(function() {
-                            pollData()
-                        }, 5000)
+               }, function(error) {
+                   tracker.errors.push(error)
+               })
+           }
+
+           return {
+                startPolling: function() {
+                    var tracker = this
+                    pollData(tracker).finally(function() {
+                        if(tracker.errors.length > 0 && tracker.pollCount < 5)
+                            tracker.startPolling()
+                        else tracker.intervalPromise = $interval(function() {
+                            pollData(tracker)
+                        }, 3000)
                     })
                 },
+                getErrorMessage: function() {
+                    return this.errors.slice(-1)[0]
+                },
                 stopPolling: function() {
-                    $interval.cancel(interval)
+                    $interval.cancel(this.intervalPromise)
+                    this.pollCount = 0
+                    this.errors.length = 0
                 },
                 isActive: function() {
                     return this.hashrate > 0 || this.sharerate > 0

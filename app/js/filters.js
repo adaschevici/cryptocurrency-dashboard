@@ -1,38 +1,46 @@
 angular.module('dashboardApp.filters', [])
 
     .filter('digits', function() {
-        return function(val, digits) {
-            if(!_.isUndefined(val)) {
-                if(val == 0)
-                    return "0";
-                var number = val.toString(),
-                    parts  = number.split('.'),
-                    decimalPlaces = digits - parts[0].length
 
-                if(decimalPlaces < 1)
-                    return parts[0]
-                return Number(number).toFixed(decimalPlaces)
+        function roundToDecimalPlaces(number, decimalPlaces) {
+            decimalPlaces = decimalPlaces || 0
+            var string = String(number)
+            if(number % 1) {
+                string = string.replace(/5$/, '6')
+            }
+            return Number((+string)).toFixed(decimalPlaces)
+        }
+
+        function isNumber(val) {
+            return !isNaN(parseFloat(val)) && isFinite(val)
+        }
+
+        return function(val, digits) {
+            if(isNumber(val) && digits) {
+                var filteredVal
+                if(val == 0) {
+                    filteredVal = 0;
+                } else {
+                    var number = val.toString(),
+                        parts  = number.split('.'),
+                        decimalPlaces = digits - parts[0].length
+
+                    filteredVal = decimalPlaces < 1 ? Math.round(val) : roundToDecimalPlaces(number, decimalPlaces)
+                }
+                return filteredVal.toString()
+
             } else return val
         }
     })
 
+
     .filter('dollarize', ['$filter', function($filter) {
-        return function (val, decimalPlaces) {
+        return function (val, useCents) {
+            var decimalPlaces = angular.isDefined(useCents) ? 2 : 0
             return '$' + $filter('number')(val, decimalPlaces)
         }
     }])
 
-    .filter('timelapse', ['$filter', function($filter) {
-        return function(val) {
-            var elapsed = (new Date().getTime() - val) / 1000
-            switch(true) {
-                case (elapsed < 10): return 'just now'
-                case (elapsed < 30): return 'a moment ago'
-                case (elapsed < 60): return 'under a minute ago'
-                default: return $filter('date')(val, 'mediumTime')
-            }
-        }
-    }])
 
     .filter('titleCase', function() {
         return function(val) {
@@ -42,6 +50,7 @@ angular.module('dashboardApp.filters', [])
         }
     })
 
+    
     .filter('trackerUnits', ['$filter', function($filter) {
         return function(val, digits) {
             if(val < 0)

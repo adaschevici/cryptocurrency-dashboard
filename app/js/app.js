@@ -11,6 +11,56 @@ angular.module('dashboardApp', [
 
 angular.module('dashboardApp')
 
+    .factory('test', function($q) {
+
+
+        function Tracker() {
+            _.extend(this, {
+                "id":"anc",
+                "name":"AnonCoin",
+                "coinID":"anc",
+
+                "lastUpdated": new Date().getTime(),
+                "pollCount":1,
+                "pollsFailed":0,
+                "hashrate":2199,
+                "sharerate":"1.0417",
+                "credit":72.44912078,
+                "debitAuto":34.24877323,
+                "debitManual":35.62481143,
+                "debitTotal":69.87358466,
+                "balance":2.5755361199999953,
+                "pool": {
+                    "pool_name":"Coinpool.{in,i2p}",
+                    "hashrate":105529,
+                    "efficiency":99.48,
+                    "workers":162,
+                    "currentnetworkblock":129806,
+                    "nextnetworkblock":129807,
+                    "lastblock":129805,
+                    "networkdiff":33.93535337,
+                    "esttime":1381.1486217282,
+                    "estshares":138999.20740352,
+                    "timesincelast":408,
+                    "nethashrate":820679527
+                }
+            })
+        }
+
+        Tracker.prototype = {
+            startPolling: function() {
+                var defer = $q.defer()
+                defer.resolve()
+                return defer.promise
+            }
+        }
+
+        return {
+            loadTracker: function() { return new Tracker() }
+        }
+    })
+
+
     .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
         $urlRouterProvider.otherwise("/captain")
@@ -68,3 +118,11 @@ angular.module('dashboardApp')
             'localbitcoins'
         ]
     }])
+
+var TestDependencies = [
+    'dashboardApp.controllers',
+    'dashboardApp.directives',
+    'dashboardApp.filters',
+    'dashboardApp.services',
+    'templates'
+]

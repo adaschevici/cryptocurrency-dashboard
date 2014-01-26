@@ -58,7 +58,7 @@ p {
     margin-bottom: 0.3rem;
     position: relative;
 }
-.tracker, .pool-data, .user-data {
+.tracker, .pool-data, .main-data {
     height: 13.5rem;
 }
 .tracker .row {
@@ -73,45 +73,45 @@ p {
     margin-left: -50%;
     margin-top: -50%;
 }
-.tracker .user-data {
+.tracker .main-data {
     padding: 1.9rem 2rem;
 }
-.tracker .user-data h3 {
+.tracker .main-data h3 {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
 }
-.tracker .user-data .hero-text {
+.tracker .main-data .hero-text {
     font-weight: 300;
     font-size: 2.5rem;
 }
-.tracker .user-data ul.stats {
+.tracker .main-data ul.stats {
     list-style: none;
     margin: 0;
     padding: 0;
     position: absolute;
     bottom: 1.75rem;
 }
-.tracker .user-data ul.stats:before {
+.tracker .main-data ul.stats:before {
     content: " ";
     display: table;
 }
-.tracker .user-data ul.stats:after {
+.tracker .main-data ul.stats:after {
     content: " ";
     display: table;
     clear: both;
 }
-.tracker .user-data ul.stats li {
+.tracker .main-data ul.stats li {
     border-left: 1px solid #e2e2e2;
     float: left;
     font-size: 0.85rem;
     line-height: 0.85rem;
     padding: 0 0.5rem;
 }
-.tracker .user-data ul.stats li:first-child {
+.tracker .main-data ul.stats li:first-child {
     border-left: none;
     padding-left: 0;
 }
-.tracker .user-data ul.stats li .data-label {
+.tracker .main-data ul.stats li .data-label {
     font-weight: 300;
     display: inline-block;
     padding-right: 0.3rem;
@@ -160,19 +160,19 @@ p {
 .tracker p {
     color: #888;
 }
-.tracker .user-data h3,
-.tracker .user-data ul.stats li .data-label {
+.tracker .main-data h3,
+.tracker .main-data ul.stats li .data-label {
     color: #aaa;
 }
-.tracker .user-data h3 small {
+.tracker .main-data h3 small {
     color: #888;
 }
-.tracker .user-data .hero-text,
-.tracker .user-data ul.stats li .data-value,
+.tracker .main-data .hero-text,
+.tracker .main-data ul.stats li .data-value,
 .tracker .pool-data h6 {
     color: #888;
 }
-.tracker .user-data ul.stats li {
+.tracker .main-data ul.stats li {
     border-color: #aaa;
 }
 .tracker .pool-data {
@@ -191,20 +191,20 @@ p {
 .tracker.active {
     background-color: #5193B1;
 }
-.tracker.active .user-data h3,
-.tracker.active .user-data ul.stats li .data-label {
+.tracker.active .main-data h3,
+.tracker.active .main-data ul.stats li .data-label {
     color: #fcfcfc;
 }
 .tracker.active p,
-.tracker.active .user-data h3 small {
+.tracker.active .main-data h3 small {
     color: #e2e2e2;
 }
-.tracker.active .user-data .hero-text,
-.tracker.active .user-data ul.stats li .data-value,
+.tracker.active .main-data .hero-text,
+.tracker.active .main-data ul.stats li .data-value,
 .tracker.active .pool-data table.stats td.data-value {
     color: #fff;
 }
-.tracker.active .user-data ul.stats li {
+.tracker.active .main-data ul.stats li {
     border-color: #ccc;
 }
 .tracker.active .pool-data {

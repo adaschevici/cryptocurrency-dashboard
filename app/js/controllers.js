@@ -1,6 +1,14 @@
 angular.module('dashboardApp.controllers', [])
 
-    .controller('MainCtrl', ['$scope', '$cookieStore', 'dashboardService', function($scope, $cookieStore, dashboardService) {
+    .controller('MainCtrl', ['$scope', '$cookieStore', 'dashboardService', 'test', function($scope, $cookieStore, dashboardService, test) {
+
+        $scope.tests = test.loadTracker()
+        $scope.tests.startPolling().then(function() {
+            console.log('polledit')
+        })
+        // console.log($scope.tests)
+
+        $scope.numpty = 5
 
         $scope.$watch(function() { return dashboardService.coins   }, function(data) { $scope.coins   = _.toArray(data) }, true)
         $scope.$watch(function() { return dashboardService.markets }, function(data) { $scope.markets = _.toArray(data) }, true)
@@ -37,4 +45,3 @@ angular.module('dashboardApp.controllers', [])
         }
 
     }])
-

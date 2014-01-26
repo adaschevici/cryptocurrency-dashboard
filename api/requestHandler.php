@@ -28,6 +28,12 @@ $resources = array(
     "markets"       => "https://api.bitcoinaverage.com/exchanges/USD",
 );
 
+if(isset($_GET['defacto'])) {
+  echo '{"name":"Bryan McFadden", "bitch":"Delta Goodrem"}';
+}
+
+
+
 if(isset($_GET['resource'])) {
 
   $request = $_GET['resource'];
