@@ -209,13 +209,13 @@ describe("trackerService", function() {
             describe("stopPolling", function() {
 
                 it("should reset the polling data", function() {
-                    forceFailedRequest()
-                    startPolling()
-                    expect(tracker.errors.length).toBeGreaterThan(0)
-                    expect(tracker.pollCount).toBeGreaterThan(0)
+                    tracker.errors = ['Error', 'Error']
+                    tracker.pollCount = 3
+                    tracker.lastUpdated = new Date().getTime()
                     tracker.stopPolling()
                     expect(tracker.errors.length).toEqual(0)
                     expect(tracker.pollCount).toEqual(0)
+                    expect(tracker.lastUpdated).toEqual(-1)
                 })
 
 
