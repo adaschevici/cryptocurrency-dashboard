@@ -31,6 +31,7 @@ angular.module('dashboardApp.services', [])
         }
     }])
 
+
     .factory('dashboardService', ['$q', '$interval', 'apiInterface', function($q, $interval, apiInterface) {
         var data = {
             markets:     {},
@@ -168,7 +169,6 @@ angular.module('dashboardApp.services', [])
                 }
             }
         })()
-
 
         return {
             loadTracker: function(id) {
