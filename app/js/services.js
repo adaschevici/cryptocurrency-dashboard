@@ -2,7 +2,7 @@ angular.module('dashboardApp.services', [])
 
     .factory('apiInterface', ['$http', function($http) {
         function loadData(query) {
-            return $http.get('api/requestHandler.php?'+query, {timeout: 15000}).error(function(data, status) {
+            return $http.get('api/requestHandler.php?'+query, {timeout: 15000}).error(function() {
                 throw "The remote source timed out."
             })
         }
@@ -137,8 +137,8 @@ angular.module('dashboardApp.services', [])
                             tracker.lastUpdated   = new Date().getTime()
                         }
                     }
-               }, function(error) {
-                   tracker.errors.push(error)
+               }, function() {
+                   tracker.errors.push("The remote server failed to respond.")
                })
            }
 
