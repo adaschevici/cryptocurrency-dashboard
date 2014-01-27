@@ -1,15 +1,16 @@
 describe("tracker", function() {
 
-    var $scope, element, $compile, $rootScope, tracker;
+    var $scope, element, $compile, $rootScope, trackerService, tracker;
 
     beforeEach(function() {
         module('dashboardApp')
         module('dashboardApp.mock.trackerService')
         module('templates')
         inject(function ($injector) {
-            $compile   = $injector.get('$compile')
-            $rootScope = $injector.get('$rootScope')
-            tracker    = $injector.get('trackerService').loadTracker()
+            $compile       = $injector.get('$compile')
+            $rootScope     = $injector.get('$rootScope'),
+            trackerService = $injector.get('trackerService')
+            tracker        = trackerService.loadTracker()
         })
     })
 
@@ -18,6 +19,13 @@ describe("tracker", function() {
         $scope  = $rootScope.$$childTail
         $rootScope.$digest()
     }
+
+
+    it("should load the tracker specified by the tracker-id attribute", function() {
+        var spy = spyOn(trackerService, 'loadTracker').andCallThrough()
+        compileElement()
+        expect(spy).toHaveBeenCalledWith('active')
+    })
 
 
     it("should set the trackerLoaded if the tracker's lastUpdated is greater than -1", function() {
@@ -51,6 +59,15 @@ describe("tracker", function() {
         expect($scope.trackerLoaded).toBe(true)
         expect($scope.errorMessage).toBeNull()
     })
+
+
+    it("should watch for changes to the loaded tracker", function() {
+        compileElement()
+        $scope.tracker.debitTotal = 1000
+        $scope.$digest()
+        expect(element.find('.user-data .debit-total').text()).toEqual('1000')
+    })
+
 
 
     it("should display the ajax-loader until the request is completed", function() {

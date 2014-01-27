@@ -3,7 +3,7 @@ describe("titleCase", function() {
     var filter
 
     beforeEach(function() {
-        module.apply(this, TestDependencies)
+        module('dashboardApp')
         inject(function ($injector) {
             filter =  $injector.get('$filter')('titleCase')
         })

@@ -3,7 +3,7 @@ describe("highlighter", function() {
     var $rootScope, $compile, element
 
     beforeEach(function() {
-        module.apply(this, TestDependencies)
+        module('dashboardApp')
         inject(function ($injector) {
             $rootScope = $injector.get('$rootScope')
             $compile   = $injector.get('$compile')
@@ -64,7 +64,6 @@ describe("highlighter", function() {
             setWatchedValue(98)
             expect(element.hasClass('decreased')).toBe(true)
         })
-
     })
 
 

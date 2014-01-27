@@ -3,7 +3,7 @@ describe("digits", function() {
     var filter
 
     beforeEach(function() {
-        module.apply("dashboardApp", TestDependencies)
+        module('dashboardApp')
         inject(function($injector) {
             filter = $injector.get("$filter")("digits")
         })

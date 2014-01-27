@@ -101,7 +101,7 @@ function mockCurrentTime() {
 
     angular.module('dashboardApp.mock.trackerService', ['dashboardApp.mock.dashboardService'])
 
-        .factory('trackerService', function(dashboardService, $q) {
+        .factory('trackerService', function($q, dashboardService) {
 
             function Tracker() {
                 _.extend(this, {
@@ -137,11 +137,8 @@ function mockCurrentTime() {
             }
 
             Tracker.prototype = {
-                startPolling: function() {
-                    var defer = $q.defer()
-                    defer.resolve()
-                    return defer.promise
-                },
+                startPolling: function() {},
+                stopPolling: function() {},
                 getErrorMessage: function() {
                     return 'There was an error!'
                 }
@@ -150,7 +147,8 @@ function mockCurrentTime() {
             var tracker = new Tracker()
 
             return {
-                loadTracker: function() { return tracker }
+                loadTracker:  function() { return tracker },
+                loadTrackers: function() { return { anc: tracker } }
             }
         })
 
