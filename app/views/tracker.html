@@ -1,5 +1,4 @@
-<div class="tracker" ng-class="{active: tracker.isActive(), error: !trackerLoaded}">
-    <p id="test">{{test}}</p>
+<div class="tracker" ng-class="{active: tracker.isActive() && trackerLoaded, error: !trackerLoaded}">
     <div class="loading" ng-if="!requestCompleted">
         <img src="images/ajax-loader.gif">
     </div>
@@ -8,7 +7,7 @@
             <h3>{{tracker.name}} <small>{{coinID | uppercase}} | {{coinPriceBtc}}</small></h3>
 
             <div ng-if="errorMessage">
-                <p class="error-message">{{errorMessage}}<br><br><a href="" ng-click="loadTracker()">Retry</a></p>
+                <p class="error-message">{{errorMessage}}</p>
             </div>
 
             <div class="user-data" ng-if="trackerLoaded">
