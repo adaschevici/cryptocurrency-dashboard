@@ -18,8 +18,16 @@
     </div>
 
     <div class="medium-7 columns">
-        {{test}}
-        <div ui-view></div>
+        <h6>Trackers</h6>
+        <div ng-if="trackerList.length === 0">
+            <p>You have not yet added any trackers.</p>
+        </div>
+        <div ng-if="trackerList.length > 0">
+            <div ng-show="watchedTrackers.length === 0">
+                <p>You are not currently watching any trackers.</p>
+            </div>
+            <tracker ng-repeat="tracker in trackerList | filter: isTrackerWatched | orderBy:'-isActive()'" tracker-id="{{tracker.id}}"></tracker>
+        </div>
     </div>
 
     <div class="medium-3 columns">
