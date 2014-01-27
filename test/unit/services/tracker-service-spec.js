@@ -49,7 +49,7 @@ describe("trackerService", function() {
                 })
             })
         })
-        
+
         describe("loadTracker", function() {
 
             it("should return a Tracker object belonging to the id passed in", function() {
