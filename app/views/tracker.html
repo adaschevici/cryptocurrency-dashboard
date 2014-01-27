@@ -12,19 +12,19 @@
             </div>
 
             <div class="user-data" ng-if="trackerLoaded">
-                <div class="hero-text">{{tracker.balance | trackerUnits:4}}</div>
+                <div class="hero-text balance">{{tracker.balance | trackerUnits:4}}</div>
                 <ul class="stats">
                     <li>
                         <span class="data-label">sharerate</span>
-                        <span class="data-value">{{tracker.sharerate | trackerUnits:4}}</span>
+                        <span class="data-value sharerate">{{tracker.sharerate | trackerUnits:4}}</span>
                     </li>
                     <li>
                         <span class="data-label">hashrate</span>
-                        <span class="data-value">{{tracker.hashrate | trackerUnits:4}}</span>
+                        <span class="data-value hashrate">{{tracker.hashrate | trackerUnits:4}}</span>
                     </li>
                     <li>
                         <span class="data-label">debit</span>
-                        <span class="data-value">{{tracker.debitTotal | trackerUnits:4}}</span>
+                        <span class="data-value debit-total">{{tracker.debitTotal | trackerUnits:4}}</span>
                     </li>
                 </ul>
             </div>
@@ -34,19 +34,19 @@
             <table class="stats">
                 <tr>
                     <td class="data-label">hashrate</td>
-                    <td class="data-value">{{tracker.pool.hashrate | trackerUnits:4}}</td>
+                    <td class="data-value hashrate">{{tracker.pool.hashrate | trackerUnits:4}}</td>
                 </tr>
                 <tr>
                     <td class="data-label">workers</td>
-                    <td class="data-value">{{tracker.pool.workers  | number:0}}</td>
+                    <td class="data-value workers">{{tracker.pool.workers  | number:0}}</td>
                 </tr>
                 <tr>
                     <td class="data-label">interval</td>
-                    <td class="data-value">{{tracker.pool.timesincelast  | number:0}}</td>
+                    <td class="data-value time-since-last">{{tracker.pool.timesincelast  | number:0}}</td>
                 </tr>
                 <tr>
                     <td class="data-label">netwkdiff</td>
-                    <td class="data-value">{{tracker.pool.networkdiff  | trackerUnits:4}}</td>
+                    <td class="data-value network-diff">{{tracker.pool.networkdiff  | trackerUnits:4}}</td>
                 </tr>
             </table>
         </div>
