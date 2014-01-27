@@ -2,8 +2,8 @@ angular.module('dashboardApp.services', [])
 
     .factory('apiInterface', ['$http', function($http) {
         function loadData(query) {
-            return $http.get('api/requestHandler.php?'+query, {timeout: 10000}).error(function(data, status) {
-                throw status
+            return $http.get('api/requestHandler.php?'+query, {timeout: 15000}).error(function(data, status) {
+                throw "The remote source timed out."
             })
         }
         return {
