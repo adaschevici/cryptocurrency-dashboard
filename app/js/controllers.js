@@ -30,13 +30,10 @@ angular.module('dashboardApp.controllers', [])
         }
 
         $scope.toggleWatchTracker = function(id) {
-
             if(_.contains($scope.watchedTrackers, id)) {
                 $scope.watchedTrackers = _.without($scope.watchedTrackers, id)
                 $scope.trackers[id].stopPolling()
-
             } else {
-
                 $scope.watchedTrackers.push(id)
                 $scope.trackers[id].startPolling()
             }
