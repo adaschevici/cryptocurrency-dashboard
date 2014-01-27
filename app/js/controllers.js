@@ -1,14 +1,11 @@
 angular.module('dashboardApp.controllers', [])
 
-    .controller('MainCtrl', ['$scope', '$cookieStore', 'dashboardService', 'test', function($scope, $cookieStore, dashboardService, test) {
+    .controller('MainCtrl', ['$scope', '$cookieStore', 'dashboardService', 'trackers', function($scope, $cookieStore, dashboardService, trackers) {
 
-        $scope.tests = test.loadTracker()
-        $scope.tests.startPolling().then(function() {
-            console.log('polledit')
-        })
-        // console.log($scope.tests)
-
-        $scope.numpty = 5
+        $scope.trackers = trackers
+        $scope.trackerList = _.toArray(trackers)
+        $scope.watchedMarkets  = $cookieStore.get('watchedMarkets') || $scope.defaultMarkets
+        $scope.watchedTrackers = $cookieStore.get('watchedTrackers:'+$scope.user) || _.pluck(trackers, 'id')
 
         $scope.$watch(function() { return dashboardService.coins   }, function(data) { $scope.coins   = _.toArray(data) }, true)
         $scope.$watch(function() { return dashboardService.markets }, function(data) { $scope.markets = _.toArray(data) }, true)
@@ -33,11 +30,13 @@ angular.module('dashboardApp.controllers', [])
         }
 
         $scope.toggleWatchTracker = function(id) {
+
             if(_.contains($scope.watchedTrackers, id)) {
                 $scope.watchedTrackers = _.without($scope.watchedTrackers, id)
                 $scope.trackers[id].stopPolling()
 
             } else {
+
                 $scope.watchedTrackers.push(id)
                 $scope.trackers[id].startPolling()
             }
