@@ -160,6 +160,7 @@ angular.module('dashboardApp.services', [])
                     $interval.cancel(this.intervalPromise)
                     this.pollCount = 0
                     this.errors.length = 0
+                    this.lastUpdated = -1
                 },
                 isActive: function() {
                     return this.hashrate > 0 || this.sharerate > 0
