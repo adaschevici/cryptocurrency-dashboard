@@ -11,6 +11,9 @@ table {
     border: 0;
     border-spacing: 0 1px;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Open Sans","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+}
 .row {
     max-width: 65rem;
 }
@@ -43,8 +46,9 @@ h4 {
     margin: 0.5rem 0;
 }
 h6 {
-    font-weight: 500;
+    font-weight: 400;
     margin: 0 0 1.2rem;
+    font-size: 0.95rem;
 }
 p {
     font-size: 0.875rem;
@@ -55,7 +59,7 @@ p {
 /* TRACKER */
 
 .tracker {
-    margin-bottom: 0.3rem;
+    margin-bottom: 2px;
     position: relative;
 }
 .tracker, .pool-data, .main-data {
