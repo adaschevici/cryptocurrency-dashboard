@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="medium-2 columns">
+        <div ng-if="trackerList.length > 0">
+            <h6>Trackers</h6>
+            <ul class="side-nav">
+                <li ng-repeat="tracker in trackerList" ng-class="{active: isTrackerWatched(tracker.id)}">
+                    <a data-tracker-id="{{id}}" ng-click="toggleWatchTracker(tracker.id)">{{tracker.name}}</a>
+                </li>
+            </ul>
+            <br>
+        </div>
+        <h6>Markets</h6>
+        <ul class="side-nav">
+            <li ng-repeat="(id, name) in marketNames" ng-class="{active: isMarketWatched(id)}">
+                <a data-market="{{id}}" ng-click="toggleWatchMarket(id)">{{name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="medium-7 columns">
+        <h6>Trackers</h6>
+        <div ng-if="trackerList.length === 0">
+            <p>You have not yet added any trackers.</p>
+        </div>
+        <div ng-if="trackerList.length > 0">
+            <div ng-show="watchedTrackers.length === 0">
+                <p>You are not currently watching any trackers.</p>
+            </div>
+            <tracker ng-repeat="tracker in trackerList | filter: isTrackerWatched | orderBy:'-isActive()'" tracker-id="{{tracker.id}}"></tracker>
+        </div>
+    </div>
+
+    <div class="medium-3 columns">
+        <h6>Bitcoin Price</h6>
+        <table>
+            <tr ng-repeat="market in markets | filter: isMarketWatched | orderBy: '-rates.bid' track by market.id"
+                highlighter="number"
+                hl-watch="market.rates.bid"
+                hl-duration="3000">
+                <td>{{marketNames[market.id] || market.id}}</td>
+                <td>{{market.rates.bid | dollarize}}</td>
+            </tr>
+        </table>
+        <br>
+        <h6>Top Coins by Volume</h6>
+        <table>
+            <tr ng-repeat="coin in coins | orderBy: '-volume_btc' | limitTo:8 track by coin.id">
+                <td>{{coin.name}}</td>
+                <td>{{coin.volume_btc | number:0}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
