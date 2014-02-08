@@ -31,4 +31,5 @@ angular.module('app').directive 'tracker',
           scope.errorMessage = null
         else
           scope.errorMessage = scope.tracker.getErrorMessage()
+          scope.trackerLoaded = false
       , true
