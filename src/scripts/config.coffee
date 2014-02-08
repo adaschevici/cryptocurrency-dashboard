@@ -5,19 +5,20 @@ angular.module('app')
   $stateProvider
   # NOTE! manually proof resolve methods against minification as they are unsupported by ngmin
   .state 'dashboard',
-      url: '/{user:ben|captain}'
-      controller: 'MainCtrl'
-      templateUrl: "views/dashboard.html"
-      resolve:
-        user: ['$rootScope', '$stateParams', ($rootScope, $stateParams) ->
-          $rootScope.user = $stateParams.user
-        ]
-        dashboard: ['dashboardService', (dashboardService) ->
+    url: '/{user:ben|captain}'
+    controller: 'MainCtrl'
+    templateUrl: "views/dashboard.html"
+    resolve:
+      user: ['$rootScope', '$stateParams', ($rootScope, $stateParams) ->
+        $rootScope.user = $stateParams.user
+      ]
+      dashboard: ['dashboardService', (dashboardService) ->
+        if dashboardService.pollCount is 0
           dashboardService.initialize()
-        ]
-        trackers: ['dashboard', '$stateParams', 'trackerService', (dashboard, $stateParams, trackerService) ->
-          trackerService.loadTrackers $stateParams.user
-        ]
+      ]
+      trackers: ['dashboard', '$stateParams', 'trackerService', (dashboard, $stateParams, trackerService) ->
+        trackerService.loadTrackers $stateParams.user
+      ]
 
 .run ($rootScope) ->
   $rootScope.marketNames =
