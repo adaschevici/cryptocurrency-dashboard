@@ -1,6 +1,6 @@
 angular.module('app').controller 'MainCtrl',
 
-  ($scope, $cookieStore, dashboardService, trackers, $templateCache) ->
+  ($scope, $cookieStore, dashboardService, trackers) ->
 
     $scope.trackers = trackers
     $scope.trackerList = _.toArray(trackers)
