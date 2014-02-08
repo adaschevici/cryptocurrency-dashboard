@@ -1,3 +1,12 @@
 ## Welcome to the Cryptocurrency Dashboard!
 
-And this is only the beginning.
+Dashboard for monitoring user and pool trackers for crypto-coins.
+
+Built with:
+
+- AngularJS
+- Bower
+- CoffeeScript
+- Grunt
+- Karma / Jasmine
+- RequireJS
