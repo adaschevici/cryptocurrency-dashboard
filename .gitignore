@@ -1,4 +1,7 @@
 .idea
 .htaccess
-api/vendor
+.tmp
+app
+bower_components
+node_modules
 # api/trackers.php
