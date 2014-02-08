@@ -5,4 +5,4 @@
 app
 bower_components
 node_modules
-api/trackers.php
+api/my_trackers.php

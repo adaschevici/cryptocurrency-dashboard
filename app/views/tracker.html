@@ -7,7 +7,7 @@
             <h3>{{tracker.name}} <small>{{coinID | uppercase}} | {{coinPriceBtc}}</small></h3>
 
             <div ng-if="errorMessage">
-                <p class="error-message">{{errorMessage}}</p>
+                <p class="error-message">{{errorMessage}}. Retrying...</p>
             </div>
 
             <div class="user-data" ng-if="trackerLoaded">
@@ -51,7 +51,6 @@
         </div>
     </div>
 </div>
-
 
 
 
