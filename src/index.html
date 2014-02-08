@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>mad coins yo</title>
+    <% if (config.environment && config.environment === 'prod') { %>
+        <link rel="stylesheet" href="<%= config.getHashedFile('.tmp/styles/styles.min.css', {trim: '.tmp/'}) %>" />
+    <% } else { %>
+        <link rel="stylesheet" href="styles/styles.css" />
+    <% } %>
+</head>
+
+<body>
+    <div class="row header">
+        <div class="medium-12 columns">
+            <ul class="button-group round user-nav right">
+                <li><a ui-sref="dashboard({user:'captain'})" ui-sref-active="active" class="small button secondary">Captain</a></li>
+                <li><a ui-sref="dashboard({user:'ben'})" ui-sref-active="active" class="small button secondary">Ben</a></li>
+            </ul>
+            <h4>megamining, yo</h4>
+        </div>
+    </div>
+    <% if (config.environment && config.environment === 'prod') { %>
+        <script src="<%= config.getHashedFile('.tmp/scripts/scripts.min.js', {trim: '.tmp/'}) %>"></script>
+    <% } else { %>
+        <script data-main="scripts/main" src="scripts/lib/require.js"></script>
+    <% } %>
+    <div class="fade" ui-view></div>
+
+</body>
+
+</html>
