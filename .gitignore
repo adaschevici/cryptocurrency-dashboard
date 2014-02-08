@@ -1,7 +1,8 @@
 .idea
 .htaccess
 .tmp
+.sass-cache
 app
 bower_components
 node_modules
-# api/trackers.php
+api/trackers.php
